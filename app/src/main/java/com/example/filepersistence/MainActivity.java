@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(input)){
             etEdit.setText(input);
             etEdit.setSelection(input.length());
+            // 请求获取焦点
+            etEdit.requestFocus();
             Toast.makeText(this, "Restoring succeeded", Toast.LENGTH_SHORT).show();
         }
     }
@@ -41,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         saveDateToLocalFile(inputText);
     }
 
+    /**
+     * 使用Java流的方式将数据写入到文件中
+     * @param inputText 保存内容
+     */
     private void saveDateToLocalFile(String inputText){
         FileOutputStream fileOutputStream = null;
         BufferedWriter bufferedWriter = null;
@@ -66,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 使用Java流的方式将文件中的数据读取出来
+     * @return 文件内容
+     */
     private String loadDateToLocalFile(){
         FileInputStream fileInputStream = null;
         BufferedReader bufferedReader = null;
